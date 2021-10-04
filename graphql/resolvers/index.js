@@ -53,7 +53,7 @@ module.exports = {
            description: args.eventInput.description,
            price: +args.eventInput.price,
            date: new Date(args.eventInput.date),
-           creator: '6154214e90de3970564ecc4d'
+           creator: '615702bf73c82eaa2e474346'
        });
        let createdEvent;
        try {
@@ -63,13 +63,13 @@ module.exports = {
                                     date: new Date(event._doc.date).toISOString(),
                                     creator: user.bind(this, result._doc.creator) 
                                 }; 
-            const user = await User.findById('6154214e90de3970564ecc4d');
+            const creator = await User.findById('615702bf73c82eaa2e474346');
                 
-            if(!user) {
+            if(!creator) {
                 throw new Error('User not found.'); 
             }
-            user.createdEvents.push(event);
-            await user.save();
+            creator.createdEvents.push(event);
+            await creator.save();
         
             return createdEvent;
         } catch (err) {
